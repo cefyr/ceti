@@ -1,10 +1,10 @@
 # ceti
-A tiny morse code training thingy for the command line
+A tiny morse code practice thingy for the command line
 
 Usage: ceti [n] 
 - prints n characters using dots and dashes
 
-To be added:
+Possibly to be added:
 - choice between characters, words and sentences
 - possibility to read text from a file and print it in morse format
 - choice between languages
