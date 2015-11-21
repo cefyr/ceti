@@ -9,10 +9,10 @@ import time
 import cetivar as cv
 
 # Default values and thingies
-times = cv.times
+times = 0
 letters = cv.letters
-skipped = 0
 random.seed()
+stoppit = False
 
 # Figure out language
 output_str = cv.output[cv.lang]
@@ -45,17 +45,17 @@ def convertMorse13(squiggles):
     return out_array
 
 # Parse arguments
-if len(sys.argv) > 1:
-    if sys.argv[1].isdigit():
-        times = int(sys.argv[1])
-    else:
-        helpAndExit()
+# if len(sys.argv) > 1:
+#     if sys.argv[1].isdigit():
+#         times = int(sys.argv[1])
+#     else:
+#         helpAndExit()
 
 start_time = time.monotonic()
 
 # The point should be that you get a prompt of for example -.--
 # and the correct answer should be y.
-for _ in range(times):
+while not stoppit:
     given = ''
     current = random.randint(0,len(letters)-1)
     correct = letters[current][0]
@@ -64,9 +64,13 @@ for _ in range(times):
         given = input('{0} '.format(prompt))
         if given in cv.unknown:
             print(cv.correction[cv.lang].format(correct))
-            skipped +=1
             break
+        elif given == cv.stoppit_key:
+            stoppit = True
+            break
+        else:
+            times += 1
 
 elapsed_time = time.monotonic() - start_time
 
-print(output_str.format(elapsed_time, elapsed_time/(times - skipped)))
+print(output_str.format(elapsed_time, elapsed_time/times))

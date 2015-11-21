@@ -1,7 +1,7 @@
 # cetivar.py - variables and strings for ceti
 
 # Configs
-times = 20
+stoppit_key = '1'
 lang = 'se'
 
 
