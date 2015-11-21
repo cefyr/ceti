@@ -1,7 +1,7 @@
 # cetivar.py - variables and strings for ceti
 
 # Configs
-times = 100
+times = 20
 lang = 'se'
 
 
@@ -26,3 +26,4 @@ letters = [('a', [1,3]), ('b', [3,1,1,1]), ('c', [3,1,3,1]), ('d', [3,1,1]),
            ('å', [1,3,3,1,3]), ('ä', [1,3,1,3]), ('ö', [3,3,3,1])]
 
 unknown = ['', '-', ' ', '.']
+dotdash = ['.', '-']
