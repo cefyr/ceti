@@ -32,17 +32,17 @@ def convert13morse(numbers):
             output += '-'
     return output
 
-#TODO Enable more options and shit
-arg = sys.argv[1]
-if sys.argv[1].isdigit():
-    times = int(sys.argv[1])
-else:    
-    helpAndExit()
+# Parse arguments
+if len(sys.argv) > 1:
+    if sys.argv[1].isdigit():
+        times = int(sys.argv[1])
+    else:
+        helpAndExit()
 
 start_time = time.monotonic()
 
-# The point should be that you get a prompt of for example -.-- and the correct
-# answer should be y.
+# The point should be that you get a prompt of for example -.--
+# and the correct answer should be y.
 for _ in range(times):
     given = ''
     current = random.randint(0,len(letters)-1)
