@@ -22,7 +22,7 @@ def helpAndExit():
     print('Usage: ceti [number of letters]')
     sys.exit()
 
-def convert13morse(numbers):
+def convert13Morse(numbers):
     '''Convert the 1-3-code to dots and dashes'''
     output = ''
     for n in range(len(numbers)):
@@ -31,6 +31,18 @@ def convert13morse(numbers):
         else:
             output += '-'
     return output
+
+def convertMorse13(squiggles):
+    '''Convert squiggles from config to 1-3-code'''
+    out_array = []
+    for n in range(len(squiggles)):
+        if squiggles[n] == cv.dotdash[0]:
+            out_array += [1]
+        elif squiggles[n] == cv.dotdash[1]:
+            out_array += [3]
+        else:
+            print('Error in squiggle conversion')
+    return out_array
 
 # Parse arguments
 if len(sys.argv) > 1:
@@ -47,7 +59,7 @@ for _ in range(times):
     given = ''
     current = random.randint(0,len(letters)-1)
     correct = letters[current][0]
-    prompt = convert13morse(letters[current][1])
+    prompt = convert13Morse(letters[current][1])
     while given != correct:
         given = input('{0} '.format(prompt))
         if given in cv.unknown:
