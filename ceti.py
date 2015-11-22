@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-# Ceti is a morse code recognition thingy for when the beeps are not enough.
-# In the future, it might do more fancy things with command-line options.
+# Ceti is a morse code practice thingy for when the beeps are not enough.
 
 import random
 import sys
@@ -45,51 +44,15 @@ def convertMorse13(squiggles):
             print('Error in squiggle conversion')
     return out_array
 
-# Parse arguments
-# if len(sys.argv) > 1:
-#     if sys.argv[1].isdigit():
-#         times = int(sys.argv[1])
-#     else:
-#         helpAndExit()
-
 # argparse handles sysargs
-# letters to dot/dash or dot/dash to letters
-## group: -t --to -f --from
-# just letters or whole words/sentences
-## group: -l --letters -w --words -s --sentences
-# translate from file
-## -F --file <file> [or - from STDIN]  
-# letters, numbers and/or punctuation
-## -a --alphabet
-## -n --numbers
-## -p --punctuation
 parser = argparse.ArgumentParser(description=cv.description)
-# One of these must be used
 translate_group = parser.add_mutually_exclusive_group(required=True)
 translate_group.add_argument("-t", "--to", action="store_true", help=cv.arg_to)
 translate_group.add_argument("-f", "--from", action="store_true", help=cv.arg_from)
 # This one is optional but needs a path or - for stdin
 #parser.add_argument("-F", "--file", nargs="?", default=sys.stdin, type=argparse.FileType('r'), help=cv.arg_file)
-# At least one of these must exist
 parser.add_argument("source", nargs='*', help=cv.arg_source)
-# source_group = 
-# source_group.add_argument("-a", "--alphabet", action="store_true", 
-#                           help=cv.arg_alphabet)
-# source_group.add_argument("-n", "--numbers", action="store_true", 
-#                           help=cv.arg_numbers)
-# source_group.add_argument("-p", "--punctuation", action="store_true", 
-#                           help=cv.arg_punctuation)
 args = parser.parse_args()
-# to OR from is True
-# filename is optional but not implemented
-# there is some combination of a, n and/or p in source
-
-# Debug test of sysargs
-if args.to:
-    print('letters -> morse')
-else:
-    print('morse -> letters')
-print(args.source)
 
 # Handle letters/numbers/punctuation marks
 signs = []
@@ -102,6 +65,7 @@ if 'p' in args.source[0]:
 if len(signs) == 0:
     print('ERROR: Nothing todooo, use args l/n/p')
     sys.exit()
+#TODO Handle possible errors in a better way
 
 start_time = time.monotonic()
 
@@ -110,8 +74,12 @@ start_time = time.monotonic()
 while not stoppit:
     given = ''
     current = random.randint(0,len(signs)-1)
-    correct = signs[current][0]
-    prompt = convert13Morse(signs[current][1])
+    if args.to:
+        correct = convert13Morse(signs[current][1])
+        prompt = signs[current][0]
+    else:
+        correct = signs[current][0]
+        prompt = convert13Morse(signs[current][1])
     while given != correct:
         given = input('{0} '.format(prompt))
         if given in cv.unknown:
