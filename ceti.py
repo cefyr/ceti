@@ -5,6 +5,8 @@
 import random
 import sys
 import time
+import argparse
+import curses
 
 import cetivar as cv
 
@@ -51,6 +53,45 @@ def convertMorse13(squiggles):
 #     else:
 #         helpAndExit()
 
+# argparse handles sysargs
+# letters to dot/dash or dot/dash to letters
+## group: -t --to -f --from
+# just letters or whole words/sentences
+## group: -l --letters -w --words -s --sentences
+# translate from file
+## -F --file <file> [or - from STDIN]  
+# letters, numbers and/or punctuation
+## -a --alphabet
+## -n --numbers
+## -p --punctuation
+parser = argparse.ArgumentParser(description=cv.description)
+# One of these must be used
+translate_group = parser.add_mutually_exclusive_group(required=True)
+translate_group.add_argument("-t", "--to", action="store_true", help=cv.arg_to)
+translate_group.add_argument("-f", "--from", action="store_true", help=cv.arg_from)
+# This one is optional but needs a path or - for stdin
+#parser.add_argument("-F", "--file", nargs="?", default=sys.stdin, type=argparse.FileType('r'), help=cv.arg_file)
+# At least one of these must exist
+parser.add_argument("source", nargs='*', help=cv.arg_source)
+# source_group = 
+# source_group.add_argument("-a", "--alphabet", action="store_true", 
+#                           help=cv.arg_alphabet)
+# source_group.add_argument("-n", "--numbers", action="store_true", 
+#                           help=cv.arg_numbers)
+# source_group.add_argument("-p", "--punctuation", action="store_true", 
+#                           help=cv.arg_punctuation)
+args = parser.parse_args()
+# to OR from is True
+# filename is optional but not implemented
+# there is some combination of a, n and/or p in source
+
+# Debug test of sysargs
+if args.to:
+    print('letters -> morse')
+else:
+    print('morse -> letters')
+print(args.source)
+
 start_time = time.monotonic()
 
 # The point should be that you get a prompt of for example -.--
@@ -74,3 +115,4 @@ while not stoppit:
 elapsed_time = time.monotonic() - start_time
 
 print(output_str.format(elapsed_time, elapsed_time/times))
+#TODO handle ZeroDivisionError for when you give up at once

@@ -15,6 +15,16 @@ correction = {'en': 'Correct: {0}',
 helptext = {'en': 'Usage: ceti [number of letters]',
             'se': 'Användning: ceti [antal bokstäver]'} 
 
+description = 'morse code practice program'
+arg_to = 'translate to morse code'
+arg_from = 'translate from morse code'
+arg_file = 'file with text to translate'
+arg_alphabet = 'practice with letters'
+arg_numbers = 'practice with numbers'
+arg_punctuation = 'practice with punctuation marks'
+arg_source = 'practice with l [letters], n [numbers] and/or p [punctuation marks]'
+
+
 # Data
 letters = [('a', [1,3]), ('b', [3,1,1,1]), ('c', [3,1,3,1]), ('d', [3,1,1]), 
            ('e', [1]), ('f', [1,1,3,1]), ('g', [3,3,1]), ('h', [1,1,1,1]), 
@@ -24,6 +34,11 @@ letters = [('a', [1,3]), ('b', [3,1,1,1]), ('c', [3,1,3,1]), ('d', [3,1,1]),
            ('u', [1,1,3]), ('ü', [1,1,3,3]), ('v', [1,1,1,3]), ('w', [1,3,3]), 
            ('x', [3,1,1,3]), ('y', [3,1,3,3]), ('z', [3,3,1,1]),
            ('å', [1,3,3,1,3]), ('ä', [1,3,1,3]), ('ö', [3,3,3,1])]
+
+numbers = [('0', [3,3,3,3,3]), ('1', [1,3,3,3,3]), ('2', [1,1,3,3,3]), 
+           ('3', [1,1,1,3,3]), ('4', [1,1,1,1,3])]
+
+punctuation = [('.', [1,3,1,3,1,3]), (',', [3,3,1,1,3,3]), ('?', [1,1,3,3,1,1])]
 
 unknown = ['', '-', ' ', '.']
 dotdash = ['.', '-']
