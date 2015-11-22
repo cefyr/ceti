@@ -12,7 +12,6 @@ import cetivar as cv
 
 # Default values and thingies
 times = 0
-letters = cv.letters
 random.seed()
 stoppit = False
 
@@ -92,15 +91,27 @@ else:
     print('morse -> letters')
 print(args.source)
 
+# Handle letters/numbers/punctuation marks
+signs = []
+if 'l' in args.source[0]:
+    signs += cv.letters
+if 'n' in args.source[0]:
+    signs += cv.numbers
+if 'p' in args.source[0]:
+    signs += cv.punctuation
+if len(signs) == 0:
+    print('ERROR: Nothing todooo, use args l/n/p')
+    sys.exit()
+
 start_time = time.monotonic()
 
 # The point should be that you get a prompt of for example -.--
 # and the correct answer should be y.
 while not stoppit:
     given = ''
-    current = random.randint(0,len(letters)-1)
-    correct = letters[current][0]
-    prompt = convert13Morse(letters[current][1])
+    current = random.randint(0,len(signs)-1)
+    correct = signs[current][0]
+    prompt = convert13Morse(signs[current][1])
     while given != correct:
         given = input('{0} '.format(prompt))
         if given in cv.unknown:
