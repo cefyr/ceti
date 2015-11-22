@@ -1,7 +1,7 @@
 # cetivar.py - variables and strings for ceti
 
 # Configs
-stoppit_key = '1'
+stoppit_key = ''
 lang = 'se'
 
 
@@ -40,5 +40,5 @@ numbers = [('0', [3,3,3,3,3]), ('1', [1,3,3,3,3]), ('2', [1,1,3,3,3]),
 
 punctuation = [('.', [1,3,1,3,1,3]), (',', [3,3,1,1,3,3]), ('?', [1,1,3,3,1,1])]
 
-unknown = ['', '-', ' ', '.']
+unknown = [' ']
 dotdash = ['.', '-']
